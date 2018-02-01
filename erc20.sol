@@ -17,16 +17,30 @@ contract ERC20 {
 
 contract MyToken is ERC20 {
 
+    string public name;
+    string public symbol;
+    uint8  public decimals = 8;
+
     address _cfo;
     mapping (address => uint256) _balances;
     uint256 _supply;
     mapping (address => mapping (address => uint256)) _approvals;
     
-    function MyToken (uint256 supply) public {
+    function MyToken (
+        uint256 initialSupply,
+        string tokenName,
+        string tokenSymbol
+        ) 
+        public 
+    {
         _cfo = msg.sender;
 
         _balances[_cfo] = supply;
-        _supply = supply;
+        _supply = initialSupply * 10 ** uint256(decimals);  
+
+        balanceOf[msg.sender] = _supply;                
+        name = tokenName;
+        symbol = tokenSymbol;
     }
 
     modifier onlyCFO() {
