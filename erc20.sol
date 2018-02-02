@@ -34,11 +34,9 @@ contract MyToken is ERC20 {
         public 
     {
         _cfo = msg.sender;
-
-        _balances[_cfo] = supply;
         _supply = initialSupply * 10 ** uint256(decimals);  
-
-        balanceOf[msg.sender] = _supply;                
+        _balances[_cfo] = _supply;
+        
         name = tokenName;
         symbol = tokenSymbol;
     }
